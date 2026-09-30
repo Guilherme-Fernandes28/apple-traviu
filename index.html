@@ -79,12 +79,18 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 .card img{transition:transform .6s var(--ease)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.perfil{animation:none}}
 @supports (animation-timeline:view()){@media(prefers-reduced-motion:no-preference){.rv{opacity:1;transform:none;transition:translate .5s var(--ease),box-shadow .3s var(--ease)}section:not(#inicio)>*:not(#lista),.fatos li,.card,.modelo{animation:entra linear both;animation-timeline:view();animation-range:entry 0% cover 28%}#inicio>*{animation:sai linear both;animation-timeline:view();animation-range:exit 0% exit 90%}#inicio>.perfil{animation:sai linear both,flutua 6s ease-in-out infinite;animation-timeline:view(),auto;animation-range:exit 0% exit 90%,normal}}}
+.progresso{position:fixed;inset:0 0 auto;height:3px;z-index:20;background:linear-gradient(90deg,#2997ff,#f5f5f7);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+@supports (animation-timeline:scroll()){@media(prefers-reduced-motion:no-preference){.progresso{animation:barra linear both;animation-timeline:scroll(root)}section:not(#inicio) h2:not(#lista){animation:titulo linear both;animation-timeline:view();animation-range:entry 10% cover 35%}.fatos li:nth-child(2),.card:nth-child(2n),.modelo:nth-child(3n+2){animation-range:entry 6% cover 34%}.fatos li:nth-child(3),.modelo:nth-child(3n){animation-range:entry 12% cover 40%}.fatos li:nth-child(4){animation-range:entry 18% cover 46%}.destaque .arte{animation:paralaxe linear both;animation-timeline:view();animation-range:cover}}}
+@keyframes barra{to{transform:scaleX(1)}}
+@keyframes titulo{from{opacity:0;transform:translateY(40px);clip-path:inset(0 0 100% 0);letter-spacing:.02em}to{opacity:1;transform:none;clip-path:inset(0);letter-spacing:-.03em}}
+@keyframes paralaxe{from{transform:translateY(60px) scale(1.04)}to{transform:translateY(-60px) scale(1)}}
 @keyframes entra{from{opacity:0;transform:translateY(70px) scale(.92)}to{opacity:1;transform:none}}
 @keyframes sai{to{opacity:0;transform:translateY(-60px) scale(.9)}}
 @media(max-width:760px){html{scroll-padding-top:120px}header{border-radius:24px}nav{width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}nav a{padding:8px 10px;white-space:nowrap}section{padding:80px 5vw}.fatos{grid-template-columns:1fr 1fr}.grade,.destaque{grid-template-columns:1fr}.destaque{padding:32px}#lista{grid-template-columns:1fr 1fr;gap:10px}.modelo{padding:18px 16px;border-radius:20px}.modelo h3{font-size:1.05rem}.modelo p{font-size:.85rem}.modelo p{margin-bottom:18px}.modelo span.ver{font-size:.85rem}.tag{font-size:.6rem}.botao.flutua{display:inline-flex}footer{padding-bottom:96px}}
 </style>
 </head>
 <body>
+<div class="progresso" aria-hidden="true"></div>
 <header>
 <a class="logo" href="#inicio"><img src="logo-pequeno.webp" alt="" width="34" height="34" style="border-radius:50%"><span>Apple Traviú</span></a>
 <nav><a href="#iphones">iPhones</a><a href="#xiaomi">Xiaomi</a><a href="#acessorios">Acessórios</a><a href="#troca">Troca</a><a href="#contato">Contato</a></nav>
@@ -94,7 +100,7 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 <img class="perfil" src="logo.webp" alt="Logo da Apple Traviú" width="160" height="160">
 <span class="selo">Bem-vindo à Apple Traviú</span>
 <h1>Qualidade e preço baixo é aqui.</h1>
-<p class="sub">iPhones do 11 ao 18 Pro Max, lacrados ou openbox, em Jundiaí/SP. Parcele em até 18x.</p>
+<p class="sub">iPhones lacrados do 13 ao 18 Pro Max e openbox do 11 em diante, em Jundiaí/SP. Parcele em até 18x.</p>
 <div class="acoes"><a class="botao zap" href="#" data-msg="gostaria de mais informações.">Falar no WhatsApp</a><a class="link" href="#iphones">Ver todos os modelos ›</a></div>
 <img class="foto" src="destaque.webp" alt="iPhone em destaque na Apple Traviú" onerror="this.remove()">
 </section>
@@ -109,7 +115,7 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 <h2>Tudo em um só lugar.</h2>
 <p class="sub">iPhone, Xiaomi, acessórios e troca do seu usado.</p>
 <div class="grade">
-<a class="card" href="#iphones"><h3>iPhone</h3><p>Do 11 ao 18 Pro Max, lacrado ou openbox.</p><img src="iphone.webp" alt="iPhones" onerror="this.remove()"></a>
+<a class="card" href="#iphones"><h3>iPhone</h3><p>Lacrado do 13 ao 18 Pro Max, openbox do 11 em diante.</p><img src="iphone.webp" alt="iPhones" onerror="this.remove()"></a>
 <a class="card zap" href="#" data-msg="tenho interesse em um celular Xiaomi. Quais modelos vocês têm?" id="xiaomi"><h3>Xiaomi</h3><p>Pergunte pelos modelos disponíveis no WhatsApp.</p><img src="xiaomi.webp" alt="Celulares Xiaomi" onerror="this.remove()"></a>
 <a class="card" href="#acessorios"><h3>Acessórios</h3><p>Carregador, película e capinha.</p><img src="acessorios.webp" alt="Acessórios para iPhone" onerror="this.remove()"></a>
 <a class="card" href="#troca"><h3>Troca</h3><p>Seu iPhone usado vale desconto no novo.</p></a>
@@ -160,7 +166,9 @@ const lnk=(m,t)=>`<a${alvo} href="${zap(m)}">${t}</a>`;
 let tipo="lacrado";
 const novos=["18 Pro","18 Pro Max","Duo"];
 const pol={"11":"6,1","11 Pro":"5,8","11 Pro Max":"6,5","12 mini":"5,4","12":"6,1","12 Pro":"6,1","12 Pro Max":"6,7","13 mini":"5,4","13":"6,1","13 Pro":"6,1","13 Pro Max":"6,7","14":"6,1","14 Plus":"6,7","14 Pro":"6,1","14 Pro Max":"6,7","15":"6,1","15 Plus":"6,7","15 Pro":"6,1","15 Pro Max":"6,7","16e":"6,1","16":"6,1","16 Plus":"6,7","16 Pro":"6,3","16 Pro Max":"6,9","17e":"6,1","17":"6,3","Air":"6,5","17 Pro":"6,3","17 Pro Max":"6,9","18 Pro":"6,3","18 Pro Max":"6,9","Duo":"5,4 e 7,6"};
-const lista=()=>document.getElementById("lista").innerHTML=Object.values(linhas).reverse().flatMap(m=>[...m].reverse()).map(x=>`<a class="modelo"${alvo} href="${zap(`tenho interesse no iPhone ${x} ${tipo}. Pode me passar mais informações?`)}"><div><span class="tag">${tipo}</span>${novos.includes(x)?'<span class="tag novo">Novo</span>':""}</div><h3>iPhone ${x}</h3><p>${pol[x]} polegadas</p><span class="ver">Tenho interesse ›</span></a>`).join("");
+const gb={"13":"128GB"};
+const todos=Object.values(linhas).reverse().flatMap(m=>[...m].reverse());
+const lista=()=>document.getElementById("lista").innerHTML=(tipo==="lacrado"?todos.slice(0,todos.indexOf("13")+1):todos).map(x=>[x,tipo==="lacrado"&&gb[x]?" "+gb[x]:""]).map(([x,g])=>`<a class="modelo"${alvo} href="${zap(`tenho interesse no iPhone ${x}${g} ${tipo}. Pode me passar mais informações?`)}"><div><span class="tag">${tipo}</span>${novos.includes(x)?'<span class="tag novo">Novo</span>':""}</div><h3>iPhone ${x}</h3><p>${pol[x]} polegadas${g?" ·"+g:""}</p><span class="ver">Tenho interesse ›</span></a>`).join("");
 lista();
 document.querySelectorAll(".tipo button").forEach(b=>b.onclick=()=>{tipo=b.dataset.tipo;document.querySelectorAll(".tipo button").forEach(x=>x.setAttribute("aria-pressed",x===b));lista()});
 document.getElementById("acess").innerHTML=["Carregador","Película","Capinha"].map(x=>lnk(`tenho interesse em ${x.toLowerCase()} para iPhone. Pode me passar mais informações?`,x)).join("");

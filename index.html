@@ -12,7 +12,7 @@
 <style>
 :root{--preto:#000;--card:#141416;--card2:#1d1d20;--linha:rgb(255 255 255/.1);--texto:#f5f5f7;--cinza:#a1a1a6;--cereja:#7A1F2B;--ease:cubic-bezier(.32,.72,0,1)}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:20px;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;background:var(--preto);color:var(--texto);line-height:1.5}
 a{color:inherit;text-decoration:none;touch-action:manipulation;transition:background-color .3s var(--ease),color .3s var(--ease),transform .2s var(--ease)}
 a:active{transform:scale(.97)}
@@ -21,7 +21,7 @@ img{max-width:100%;display:block}
 h1,h2{text-wrap:balance;letter-spacing:-.03em;line-height:1.05;font-weight:700}
 h1{font-size:clamp(2.8rem,8vw,5.5rem)}
 h2{font-size:clamp(2.2rem,5vw,3.6rem)}
-header{position:sticky;top:12px;z-index:10;width:min(1100px,calc(100% - 24px));margin:12px auto 0;padding:8px 8px 8px 14px;border-radius:999px;background:rgb(29 29 32/.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 0 0 1px var(--linha);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+header{position:relative;z-index:10;width:min(1100px,calc(100% - 24px));margin:12px auto 0;padding:8px 8px 8px 14px;border-radius:999px;background:rgb(29 29 32/.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 0 0 1px var(--linha);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
 nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 nav a{padding:8px 12px;font-size:.9rem;color:var(--cinza);border-radius:999px}
@@ -71,8 +71,8 @@ section{padding:112px max(5vw,calc((100% - 1100px)/2));text-align:center}
 #sobre .sub{max-width:52ch;line-height:1.8}
 #contato{background:radial-gradient(ellipse at top,#1d1d20,#000 70%)}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:32px max(5vw,calc((100% - 1100px)/2));border-top:1px solid var(--linha);color:var(--cinza);font-size:.85rem}
-.insta img{margin-right:8px}
-.botao.flutua{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:10;display:none;background:var(--cereja);color:#fff;box-shadow:0 10px 30px rgb(0 0 0/.5)}
+.insta img,.icone{margin-right:8px}
+.botao.flutua{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:10;display:none;background:var(--texto);color:#000;box-shadow:0 10px 30px rgb(0 0 0/.6)}
 .botao.flutua{transition:opacity .3s var(--ease)}
 .flutua.oculto{opacity:0;pointer-events:none}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -93,7 +93,7 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 @keyframes paralaxe{from{transform:translateY(60px) scale(1.04)}to{transform:translateY(-60px) scale(1)}}
 @keyframes entra{from{opacity:0;transform:translateY(70px) scale(.92)}to{opacity:1;transform:none}}
 @keyframes sai{to{opacity:0;transform:translateY(-60px) scale(.9)}}
-@media(max-width:760px){html{scroll-padding-top:120px}header{border-radius:24px}nav{width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}nav a{padding:8px 10px;white-space:nowrap}section{padding:80px 5vw}.fatos{grid-template-columns:1fr 1fr}.grade,.destaque{grid-template-columns:1fr}.destaque{padding:32px}#lista{grid-template-columns:1fr;gap:10px}.abas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin-inline:-5vw;padding-inline:5vw;scrollbar-width:none}.abas button{flex:none}.modelo{padding:18px 16px;border-radius:20px}.modelo h3{font-size:1.05rem}.modelo .ver{font-size:.85rem}.tag{font-size:.6rem}.botao.flutua{display:inline-flex}footer{padding-bottom:96px}}
+@media(max-width:760px){html{scroll-padding-top:20px}header{border-radius:24px}nav{width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}nav a{padding:8px 10px;white-space:nowrap}section{padding:80px 5vw}.fatos{grid-template-columns:1fr 1fr}.grade,.destaque{grid-template-columns:1fr}.destaque{padding:32px}#lista{grid-template-columns:1fr;gap:10px}.abas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin-inline:-5vw;padding-inline:5vw;scrollbar-width:none}.abas button{flex:none}.modelo{padding:18px 16px;border-radius:20px}.modelo h3{font-size:1.05rem}.modelo .ver{font-size:.85rem}.tag{font-size:.6rem}.botao.flutua{display:inline-flex}footer{padding-bottom:96px}}
 </style>
 </head>
 <body>
@@ -108,7 +108,7 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 <span class="selo">Bem-vindo à Apple Traviú</span>
 <h1>Qualidade e preço baixo é aqui.</h1>
 <p class="sub">iPhones lacrados do 13 ao 18 Pro Max e seminovos do 11 em diante, em Jundiaí/SP. Parcele em até 18x.</p>
-<div class="acoes"><a class="botao zap" href="#" data-msg="gostaria de mais informações.">Falar no WhatsApp</a><a class="link" href="#iphones">Ver todos os modelos ›</a></div>
+<div class="acoes"><a class="botao zap" href="#" data-msg="gostaria de mais informações."><img class="icone" src="whatsapp.webp" alt="" width="20" height="20" onerror="this.remove()">Falar no WhatsApp</a><a class="link" href="#iphones">Ver todos os modelos ›</a></div>
 <img class="foto" src="destaque.webp" alt="iPhone em destaque na Apple Traviú" onerror="this.remove()">
 </section>
 <ul class="fatos">
@@ -160,10 +160,10 @@ header.rolou{background:rgb(29 29 32/.92);box-shadow:inset 0 0 0 1px rgb(255 255
 <section id="contato">
 <h2>Fale com a gente.</h2>
 <p class="sub">WhatsApp (11) 94006-1869<br>Todos os dias, das 10h às 20h · Jundiaí/SP</p>
-<div class="acoes"><a class="botao zap" href="#" data-msg="gostaria de mais informações.">Chamar no WhatsApp</a><a class="botao escuro insta" href="https://instagram.com/appletraviu" target="_blank" rel="noopener"><img src="instagram.webp" alt="" width="20" height="20" onerror="this.remove()">@appletraviu</a></div>
+<div class="acoes"><a class="botao zap" href="#" data-msg="gostaria de mais informações."><img class="icone" src="whatsapp.webp" alt="" width="20" height="20" onerror="this.remove()">Chamar no WhatsApp</a><a class="botao escuro insta" href="https://instagram.com/appletraviu" target="_blank" rel="noopener"><img src="instagram.webp" alt="" width="20" height="20" onerror="this.remove()">Instagram</a></div>
 </section>
 </main>
-<a class="botao flutua oculto zap" href="#" data-msg="gostaria de mais informações.">WhatsApp</a>
+<a class="botao flutua oculto zap" href="#" data-msg="gostaria de mais informações."><img class="icone" src="whatsapp.webp" alt="" width="20" height="20" onerror="this.remove()">WhatsApp</a>
 <footer><span>© Apple Traviú · Jundiaí/SP</span><span>Não aceitamos boleto</span></footer>
 <script>
 const cel=matchMedia("(pointer:coarse)").matches;

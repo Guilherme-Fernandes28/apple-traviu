@@ -50,7 +50,6 @@ section{padding:112px max(5vw,calc((100% - 1100px)/2));text-align:center}
 #lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;margin-top:48px;text-align:left}
 .modelo{display:flex;flex-direction:column;padding:24px;border-radius:24px;background:var(--card);box-shadow:inset 0 0 0 1px transparent;transition:box-shadow .3s var(--ease),translate .4s var(--ease)}
 .tag{align-self:flex-start;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px rgb(255 255 255/.18);color:var(--cinza);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.tag.novo{color:#f56300;box-shadow:inset 0 0 0 1px rgb(245 99 0/.4);margin-left:6px}
 .modelo h3{font-size:1.35rem;letter-spacing:-.02em;margin-top:18px}
 .modelo .gb{margin:20px 0 24px}
 .modelo .ver{margin-top:auto;padding-top:16px;border-top:1px solid var(--linha);color:#2997ff;font-weight:500;font-size:.95rem}
@@ -60,7 +59,6 @@ section{padding:112px max(5vw,calc((100% - 1100px)/2));text-align:center}
 .abas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:28px}
 .abas button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--card2);color:var(--cinza);font:inherit;font-weight:600;cursor:pointer;transition:background-color .3s var(--ease),color .3s var(--ease)}
 .abas button[aria-selected=true]{background:var(--texto);color:#000}
-.abas .novo{margin-left:6px;color:#f56300;font-size:.7rem;font-weight:700;text-transform:uppercase}
 .modelos{display:flex;flex-wrap:wrap;gap:10px}
 .modelos a{min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border-radius:999px;background:var(--card2);font-weight:500}
 #acessorios .modelos{justify-content:center;margin-top:32px}
@@ -172,13 +170,12 @@ const linhas={"11":["11","11 Pro","11 Pro Max"],"12":["12 mini","12","12 Pro","1
 const alvo=cel?"":' target="_blank" rel="noopener"';
 const lnk=(m,t)=>`<a${alvo} href="${zap(m)}">${t}</a>`;
 let tipo="lacrado";
-const novos=["18 Pro","18 Pro Max","Duo"];
 const gbs={"11":["64GB","128GB","256GB"],"11 Pro":["64GB","256GB","512GB"],"11 Pro Max":["64GB","256GB","512GB"],"12 mini":["64GB","128GB","256GB"],"12":["64GB","128GB","256GB"],"12 Pro":["128GB","256GB","512GB"],"12 Pro Max":["128GB","256GB","512GB"],"13 mini":["128GB","256GB","512GB"],"13":["128GB","256GB","512GB"],"13 Pro":["128GB","256GB","512GB","1TB"],"13 Pro Max":["128GB","256GB","512GB","1TB"],"14":["128GB","256GB","512GB"],"14 Plus":["128GB","256GB","512GB"],"14 Pro":["128GB","256GB","512GB","1TB"],"14 Pro Max":["128GB","256GB","512GB","1TB"],"15":["128GB","256GB","512GB"],"15 Plus":["128GB","256GB","512GB"],"15 Pro":["128GB","256GB","512GB","1TB"],"15 Pro Max":["256GB","512GB","1TB"],"16e":["128GB","256GB","512GB"],"16":["128GB","256GB","512GB"],"16 Plus":["128GB","256GB","512GB"],"16 Pro":["128GB","256GB","512GB","1TB"],"16 Pro Max":["256GB","512GB","1TB"],"17e":["256GB","512GB"],"17":["256GB","512GB"],"Air":["256GB","512GB","1TB"],"17 Pro":["256GB","512GB","1TB"],"17 Pro Max":["256GB","512GB","1TB","2TB"],"18 Pro":["256GB","512GB","1TB","2TB"],"18 Pro Max":["256GB","512GB","1TB","2TB"],"Duo":["256GB","512GB","1TB","2TB"]};
 const ordem=["Duo","18","17","16","15","14","13","12","11"];
 let ger="Duo";const esc={};
 const lista=()=>{const gens=tipo==="lacrado"?ordem.slice(0,ordem.indexOf("13")+1):ordem;if(!gens.includes(ger))ger=gens[0];
-document.getElementById("abas").innerHTML=gens.map(g=>`<button type="button" role="tab" aria-selected="${g===ger}" data-g="${g}">iPhone ${g}${["Duo","18"].includes(g)?'<span class="novo">Novo</span>':""}</button>`).join("");
-document.getElementById("lista").innerHTML=linhas[ger].filter(x=>!(tipo==="lacrado"&&x==="13 mini")).map(x=>{const c=tipo==="lacrado"&&x==="13"?["128GB"]:gbs[x];const v=c.includes(esc[x])?esc[x]:c[0];return `<div class="modelo"><div><span class="tag">${tipo}</span>${novos.includes(x)?'<span class="tag novo">Novo</span>':""}</div><h3>iPhone ${x}</h3><div class="gb" role="group" aria-label="Armazenamento do iPhone ${x}">${c.map(g=>`<button type="button" aria-pressed="${g===v}" data-m="${x}" data-v="${g}">${g}</button>`).join("")}</div><a class="ver"${alvo} href="${zap(`tenho interesse no iPhone ${x} ${v} ${tipo}. Pode me passar mais informações?`)}">Tenho interesse no ${v} ›</a></div>`}).join("")};
+document.getElementById("abas").innerHTML=gens.map(g=>`<button type="button" role="tab" aria-selected="${g===ger}" data-g="${g}">iPhone ${g}</button>`).join("");
+document.getElementById("lista").innerHTML=linhas[ger].filter(x=>!(tipo==="lacrado"&&x==="13 mini")).map(x=>{const c=tipo==="lacrado"&&x==="13"?["128GB"]:gbs[x];const v=c.includes(esc[x])?esc[x]:c[0];return `<div class="modelo"><div><span class="tag">${tipo}</span></div><h3>iPhone ${x}</h3><div class="gb" role="group" aria-label="Armazenamento do iPhone ${x}">${c.map(g=>`<button type="button" aria-pressed="${g===v}" data-m="${x}" data-v="${g}">${g}</button>`).join("")}</div><a class="ver"${alvo} href="${zap(`tenho interesse no iPhone ${x} ${v} ${tipo}. Pode me passar mais informações?`)}">Tenho interesse no ${v} ›</a></div>`}).join("")};
 document.getElementById("abas").onclick=e=>{const b=e.target.closest("button");if(b){ger=b.dataset.g;lista()}};
 document.getElementById("lista").onclick=e=>{const b=e.target.closest(".gb button");if(!b)return;const x=b.dataset.m,v=b.dataset.v,c=b.closest(".modelo");esc[x]=v;b.parentNode.querySelectorAll("button").forEach(o=>o.setAttribute("aria-pressed",o===b));const l=c.querySelector(".ver");l.href=zap(`tenho interesse no iPhone ${x} ${v} ${tipo}. Pode me passar mais informações?`);l.textContent=`Tenho interesse no ${v} ›`};
 lista();
